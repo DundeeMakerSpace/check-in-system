@@ -1,0 +1,10 @@
+# Welcome to Sonic Pi v2.11
+
+use_synth :piano
+
+/live_loop :thing do
+play_pattern_timed [57, 68, 61, 76], [0.1], amp: 3
+sleep 1/
+play_pattern_timed [76, 61, 68, 57], [0.1], amp: 3
+/sleep 1
+end/
