@@ -10,8 +10,7 @@ def output(message):
 codes = {}
 
 def play_sound(sound):
-    path = '/home/pi/Desktop/check-in-system/'
-    subprocess.call(['play', path + sound])
+    subprocess.call(['play', sound])
 
 def scan_code(code):
     
@@ -83,9 +82,12 @@ def main_nfc():
         output = reader.stdout.readline()
 
         if 'READ' in output:
-            print(output[5:-1])
+            scan_code(output[5:-1])
 
 if __name__ == "__main__":
+
+    path = os.path.dirname(os.path.realpath(__file__))
+    os.chdir(path)
 
     with PidFile("/tmp/check-in-system.pid"):
         main_nfc()
