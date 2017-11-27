@@ -1,3 +1,0 @@
-[submodule "libnfc"]
-	path = libnfc
-	url = https://github.com/nfc-tools/libnfc.git
