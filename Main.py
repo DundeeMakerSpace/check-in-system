@@ -2,9 +2,6 @@ import os, sys, serial, time
 from pidfile import PidFile
 import subprocess
 
-#import pygame
-#pygame.mixer.init()
-
 def output(message):
 
     print(message)
@@ -30,7 +27,7 @@ def scan_code(code):
         output('checked out: {}'.format(code))
         play_sound('check_out.wav')
 
-def main():
+def main_rfid():
 
     output('Started')
 
@@ -73,7 +70,22 @@ def main():
 
     output('Finished')
 
+def main_nfc():
+
+    print("I'm an NFC teapot, short and BEEP")
+
+    reader = subprocess.Popen(['./just-use-c/dms-nfc-reader'], stdout=subprocess.PIPE)
+
+    output = None
+
+    while output != '':
+
+        output = reader.stdout.readline()
+
+        if 'READ' in output:
+            print(output[5:-1])
+
 if __name__ == "__main__":
 
     with PidFile("/tmp/check-in-system.pid"):
-        main()
+        main_nfc()
